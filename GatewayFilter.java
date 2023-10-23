@@ -1,3 +1,6 @@
+//source links
+//https://youtu.be/Aqznhmhy_9o?si=ADVS5zuXbQns8YJ4
+//https://github.com/serlesen/microservices-bookstore/tree/chapter_3_1/backend-user/src/main/java/com/sergio/bookstore/backend/user/config
 ================================================= WebClientConfig.java =================================================
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
