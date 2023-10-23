@@ -68,3 +68,69 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
         // empty class as I don't need any particular configuration
     }
 }
+
+
+//other implementation by Java Techie
+//source: https://youtu.be/qODoDq5_hAM?si=duLc2HLBCG7XX-I0
+================================================= AuthFilter.java =================================================
+package com.dcbf.apigateway.authfilter;
+
+import com.dcbf.apigateway.exception.TokenNotFoundException;
+import com.dcbf.apigateway.util.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
+
+@Component
+public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
+
+    @Autowired
+    private RouteValidator routeValidator;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private WebClient.Builder webClientBuilder;
+
+    public AuthenticationFilter() {
+        super(Config.class);
+    }
+
+    @Override
+    public GatewayFilter apply(Config config) {
+        return ((exchange, chain) -> {
+            ServerHttpRequest request = null;
+            if (routeValidator.isSecured.test(exchange.getRequest())) {
+                //header contains token or not
+                if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+                    throw new TokenNotFoundException("missing authorization header");
+                }
+
+                String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+                if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                    authHeader = authHeader.substring(7);
+                }
+
+                try{
+                   request = exchange.getRequest().mutate()
+                            .header("user", jwtUtil.extractUserName(authHeader))
+                            .build();
+                   //need to call auth user service if want
+
+                }catch (Exception ex){
+                    throw new RuntimeException("un authorized access");
+                }
+            }
+            return chain.filter(exchange.mutate().request(request).build());
+        });
+    }
+
+    public static class Config {
+
+    }
+}
