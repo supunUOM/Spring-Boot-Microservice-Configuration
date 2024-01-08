@@ -44,5 +44,11 @@ public class MappingHelper {
     public <S, T> T mapToDTO(S source, Class<T> targetClass) {
         return modelMapper.map(source, targetClass);
     }
+
+    //Normal way for List mapping
+    List<UserDTO> dtos = users
+         .stream()
+         .map(user -> modelMapper.map(user, UserDTO.class))
+         .collect(Collectors.toList());
 }
 
