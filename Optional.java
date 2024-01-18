@@ -1,3 +1,7 @@
+DONT USE OPTINAL
+1. As method parameter
+2. As class variable
+
 ==================== REPOSITORY ====================
 public class UserRepository {
 
