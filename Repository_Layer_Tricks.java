@@ -1,5 +1,26 @@
+############## PERSISTANCE ANNOTATION ###############
+====================== 1 optinal ======================
+/** if we try to save courseMaterial without a course it will going to throw error **/
+public class CourseMaterial{
+    @OneToOne(
+        cascade = CascadeType.ALL,
+        optional = true
+    )
+    private Course course;
 
-// Write custom queries with hibernate
+}
+________________________
+public class Course {
+    @OneToOne
+    private CourseMaterial courseMaterial;
+}
+
+====================== ======================
+
+
+
+
+############# WRITE CUSTOM QUERIES WITH HIBERNATE ###############
 ====================== 0 JPQL ======================
 public interface SampleRepository extends JpaRepository<Sample, Integer> {
 
