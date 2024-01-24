@@ -42,6 +42,10 @@ public interface SampleRepository extends JpaRepository<Sample, Integer> {
     //Native SQL with Index parameters
     @Query(value = "SELECT * from Employee e where e.lastname= ?1 and e.department= ?2", nativeQuery = true)
     List<Employee> findByLastNamewithIndexParam(String lastname, String department);
+
+    //SQL IN UNNEST
+    @Query("SELECT * FROM tbl_team_profile  WHERE team_id in UNNEST(@teamIds) AND language_code = @languageCode")
+    List<TeamProfile> findTeamsByIDsAndLanguageCode(@Param("teamIds") List<Long> teamIds, @Param("languageCode") String languageCode);
 }
 
 ====================== 1 ====================== ( https://youtu.be/56pK77U307g?si=vQHIaKdE_vf9SuIO )
