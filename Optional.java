@@ -60,3 +60,35 @@ public class UserService {
 
     }
 }
+
+
+===================== PRACTICAL USAGE =====================
+https://www.bezkoder.com/jpa-one-to-many-unidirectional/
+
+  @GetMapping("/tutorials/{id}")
+  public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
+    Tutorial tutorial = tutorialRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id)); //Or Else Throw
+
+    return new ResponseEntity<>(tutorial, HttpStatus.OK);
+  }
+
+  @GetMapping("/tutorials")
+  public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String title) {
+    List<Tutorial> tutorials = new ArrayList<Tutorial>();
+
+    if (title == null)
+      tutorialRepository.findAll().forEach(tutorials::add);  //Method Reference
+    else
+      tutorialRepository.findByTitleContaining(title).forEach(tutorials::add); //forEach Usage
+
+    if (tutorials.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    return new ResponseEntity<>(tutorials, HttpStatus.OK);
+  }
+
+
+  Tutorial tutorial = tutorialRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Not found Tutorial with id = " + id));
