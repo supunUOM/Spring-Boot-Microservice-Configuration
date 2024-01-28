@@ -63,7 +63,8 @@ public class UserService {
 
 
 ===================== PRACTICAL USAGE =====================
-https://www.bezkoder.com/jpa-one-to-many-unidirectional/
+Tutorial Link: https://www.bezkoder.com/jpa-one-to-many-unidirectional/
+GITHUB: https://github.com/bezkoder/spring-boot-one-to-many/tree/master
 
   @GetMapping("/tutorials/{id}")
   public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
