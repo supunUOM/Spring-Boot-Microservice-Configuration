@@ -51,7 +51,7 @@ public class UserService {
         var list1 = userList.orElse(Collections.singletonList(new User(55, "John")));
         System.out.println(list1);
 
-        //TODO: OrElseGet(()->) can provide default value if empty
+        //TODO: OrElseGet(()->) can provide default value if empty (can do network call as well here)
         var list2 = userList.orElseGet(() -> Collections.singletonList(new User(55, "John")));
         System.out.println(list2);
 
