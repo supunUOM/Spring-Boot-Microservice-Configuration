@@ -17,7 +17,9 @@ public class Course {
 
 ====================== ======================
 
-
+############# put default value Entity int property ##############
+@Column(name="value", nullable = false)
+private int value;    //because of the primitive value is set to 0
 
 
 ############# WRITE CUSTOM QUERIES WITH HIBERNATE ###############
