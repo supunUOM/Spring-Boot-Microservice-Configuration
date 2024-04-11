@@ -21,7 +21,10 @@ basket.containsKey("apple") //check key is exist.
      System.out.println(Arrays.toString(arr));
 
 4. Arrays.asList() //this return unmodifiable list
-  This will return an intStream we can use for get the summaryStatistics()
+  The final result is equal to Collections.unmodifiableList() returned result.
+     List<Integer> list = Arrays.asList(arr);
+     List<Integer> integers = Collections.unmodifiableList(list); 
+  This will return an intStream if you create array with int[]. Then it can use for get the summaryStatistics()
 
 === Array to Collection ===
 1. Arrays.stream() will return a IntStream
