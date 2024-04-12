@@ -48,16 +48,16 @@ list1.indexOf(4) //return the index of 4
 
   
 === HashMap ===
+1. Hashmap methods
 Map<String, Integer> basket = new HashMap<>();
 basket.put("apple", 2);
 basket.merge("apple", 1, Integer::sum); //increase the prev value by one  
 basket.merge("apple", 3, (prev, curr) -> prev + curr);
 basket.containsKey("apple") //check key is exist.
 
-  
-=== Collection Map ====
-1. filter a map and return new map
+2. filter a map and return new map
   //here values is a map
   Map<String, Integer> result = values.entrySet()
                 .stream().filter(e -> e.getValue() > 1)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
