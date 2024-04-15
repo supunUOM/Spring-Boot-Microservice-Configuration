@@ -65,7 +65,11 @@ basket.merge("apple", 1, Integer::sum); //increase the prev value by one
 basket.merge("apple", 3, (prev, curr) -> prev + curr);
 basket.containsKey("apple") //check key is exist.
 
-2. filter a map and return new map
+2. get the keys and values separately
+List<Integer> valuesSet = resultMap.values().stream().toList();
+Set<Integer> keySet = resultMap.keySet();
+
+3. filter a map and return new map
   //here values is a map
   Map<String, Integer> result = values.entrySet()
                 .stream().filter(e -> e.getValue() > 1)
