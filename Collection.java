@@ -1,10 +1,10 @@
 === String ===
-"Supun San".indexOf("Sa")); //6
-"Supun".replace('S','D')); //Dupun
-"Hello world".substring(3)); //lo world
-"Hello world".substring(1, 4)); //ell
-"Hello_world".lastIndexOf("l")); //9
-new StringBuffer("Hello").reverse()); //olleH
+"Supun San".indexOf("Sa"); //6
+"Supun".replace('S','D'); //Dupun
+"Hello world".substring(3); //lo world
+"Hello world".substring(1, 4); //ell
+"Hello_world".lastIndexOf("l"); //9
+new StringBuffer("Hello").reverse(); //olleH
 "Hello".contains("He"); //true
 "Hello".startsWith("H"); //true
 
